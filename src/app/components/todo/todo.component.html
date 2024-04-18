@@ -1,1 +1,156 @@
-<p>todo works!</p>
+<div
+  class="w-full max-w-lg mx-auto bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+  <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+    List of Tasks
+  </h5>
+  <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Connect with one of our available wallet providers or
+    create a new one.</p>
+
+  <section class="flex flex-wrap gap-2">
+    <div>
+      <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
+        (click)="showAndHideSortsDropdown()"
+        class="text-white mt-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button">Sort by <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 4 4 4-4" />
+        </svg>
+      </button>
+
+      <!-- Dropdown menu -->
+      <div id="dropdownHover"
+        class="z-10 mt-4 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 {{hideSorts ? 'hidden' : ''}}">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+          <li>
+            <button
+              class="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              (click)="sortByPriority()">Priority</button>
+          </li>
+          <li>
+            <button
+              class="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              (click)="sortByEndDate()">Expiration Date</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
+        (click)="showAndHideFiltersProrityDropdown()"
+        class="text-white mt-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button">Filter by priority<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 4 4 4-4" />
+        </svg>
+      </button>
+
+      <!-- Dropdown menu -->
+      <div id="dropdownHover"
+        class="z-10 mt-4 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 {{hideFiltersPriority ? 'hidden' : ''}}">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+          <li>
+            <button
+              class="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              (click)="filterByPriority(0)">Low</button>
+          </li>
+          <li>
+            <button
+              class="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              (click)="filterByPriority(1)">Medium</button>
+          </li>
+          <li>
+            <button
+              class="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              (click)="filterByPriority(2)">High</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
+        (click)="showAndHideFiltersDateDropdown()"
+        class="text-white mt-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button">Filter by Date<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 4 4 4-4" />
+        </svg>
+      </button>
+
+      <!-- Dropdown menu -->
+      <div id="dropdownHover"
+        class="z-10 mt-4 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 {{hideFiltersDate ? 'hidden' : ''}}">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+          <li>
+            <input #inputBox (change)="filterByEndDate(inputBox.value)" class="w-full text-left block px-4 py-2 bg-gray-600" type="date" name="endDate" id="endDate">
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
+        (click)="showAndHideFiltersStatusDropdown()"
+        class="text-white mt-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button">Filter by Status<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 1 4 4 4-4" />
+        </svg>
+      </button>
+
+      <!-- Dropdown menu -->
+      <div id="dropdownHover"
+        class="z-10 mt-4 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 {{hideFiltersStatus ? 'hidden' : ''}}">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+          <li>
+            <button
+              class="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              (click)="filterByStatus(0)">Pending</button>
+          </li>
+          <li>
+            <button
+              class="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              (click)="filterByStatus(1)">Done</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <button class="text-blue-500 mt-2 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center hover:underline" (click)="resetFilters()">reset filters</button>
+    </div>
+  </section>
+
+  <ul class="my-4 space-y-3">
+    <li *ngFor="let todo of todos">
+      <div
+        class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+        <span class="flex-1 ms-3 whitespace-nowrap">{{todo.title}}</span>
+        <span
+          class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{todo.endDate
+          | date:"mediumDate"}}</span>
+        <span
+          class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{todo.priority
+          | priority}}</span>
+        <input type="checkbox" class="w-4 h-4 ml-2" #inputBox (change)="doneTask(todo.id, inputBox.checked)"
+          [checked]="todo.status">
+          <button type="button" (click)="deleteTask(todo.id)" class="focus:outline-none ml-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+      </div>
+    </li>
+
+    <p class="text-white" *ngIf="todos.length === 0">Not found Tasks</p>
+  </ul>
+  <a [routerLink]="['/add']"
+    class="inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add
+    Task</a>
+  <div>
+    <div class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
+      <svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+      Why do I need to connect with my wallet?
+    </div>
+  </div>
+</div>
